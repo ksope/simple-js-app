@@ -1,6 +1,23 @@
 //create a list of Pokemons
-let pokemonList = [];
 
+
+
+let pokemonRepository = (function(){
+    let pokemonList = [];
+
+    function add(pokemon){
+        pokemonList.push(pokemon);
+    }
+
+    function getAll(){
+        return pokemonList;
+    }
+    return{
+        add: add,
+        getAll: getAll
+    };
+
+})();
 //add some Pokemons to the list
 pokemonList.push({name: "Bulbasaur", height: 7, types: ['grass', 'poison']});
 pokemonList.push({name: "Ivysaur", height: 10, types: ['grass', 'poison']});
