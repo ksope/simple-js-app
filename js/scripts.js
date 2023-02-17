@@ -9,6 +9,6 @@ pokemonList.push({name: "Caterpie", height: 3, types: ['bug', 'electric']});
 pokemonList.push({name: "Wartortle", height: 10, types: ['dark', 'steel']});
 
 //print out each pokemon in the list 
-for(let i = 0; i < pokemonList.length; i++){
-    pokemonList[i].height > 10? document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ") " + "-Wow, that's big!<br>"): document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ")<br>");
-}
+pokemonList.forEach(function(pokemon){
+    pokemon.height > 10? document.write(pokemon.name + " (height: " + pokemon.height + ") " + "- Wow, that's big!<br>"): document.write(pokemon.name + " (height: " + pokemon.height + ")<br>");
+});
