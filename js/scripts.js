@@ -1,7 +1,4 @@
-//create a list of Pokemons
-
-
-
+//create a list of Pokemons in an IIFE to avoid accidentally accessing the global state
 let pokemonRepository = (function(){
     let pokemonList = [];
 
@@ -12,20 +9,24 @@ let pokemonRepository = (function(){
     function getAll(){
         return pokemonList;
     }
+
     return{
         add: add,
-        getAll: getAll
-    };
+        getAll: getAll,
+     };
 
 })();
+
 //add some Pokemons to the list
-pokemonList.push({name: "Bulbasaur", height: 7, types: ['grass', 'poison']});
-pokemonList.push({name: "Ivysaur", height: 10, types: ['grass', 'poison']});
-pokemonList.push({name: "Venusaur", height: 20, types: ['grass', 'poison']});
-pokemonList.push({name: "Caterpie", height: 3, types: ['bug', 'electric']});
-pokemonList.push({name: "Wartortle", height: 10, types: ['dark', 'steel']});
+pokemonRepository.add({name: "Bulbasaur", height: 7, types: ['grass', 'poison']});
+pokemonRepository.add({name: "Ivysaur", height: 10, types: ['grass', 'poison']});
+pokemonRepository.add({name: "Venusaur", height: 20, types: ['grass', 'poison']});
+pokemonRepository.add({name: "Caterpie", height: 3, types: ['bug', 'electric']});
+pokemonRepository.add({name: "Wartortle", height: 10, types: ['dark', 'steel']});
+
 
 //print out each pokemon in the list 
-pokemonList.forEach(function(pokemon){
+
+pokemonRepository.getAll().forEach(function(pokemon){
     pokemon.height > 10? document.write(pokemon.name + " (height: " + pokemon.height + ") " + "- Wow, that's big!<br>"): document.write(pokemon.name + " (height: " + pokemon.height + ")<br>");
 });
