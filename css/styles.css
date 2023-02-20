@@ -1,0 +1,25 @@
+@media screen and ( max-width:600px){
+    .button-style__salmon{
+        
+        width: 80%;
+        background: lightsalmon;
+    }
+}
+
+.button-style__salmon {
+
+    background :  salmon; 
+    color : White;
+    font : 3rem sans-serif;
+    border : none;
+    border-radius: 0.5rem;
+    padding : 0.75rem;
+    margin : 0.75rem ;
+    text-align : center;
+    cursor : pointer ;
+  }
+
+
+  .pokemon-list{
+    list-style-type: none;
+  }

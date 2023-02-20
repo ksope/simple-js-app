@@ -25,7 +25,18 @@ let pokemonRepository = (function(){
         }
     }
 
-    
+    //add a pokemon to the pokemon list using DOM
+    function addListItem(pokemon){
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('button-style__salmon');
+        listItem.appendChild(button);
+        tempPokemonList.appendChild(listItem);
+
+    }
+
+ 
     //filter the pokemonList based on the height of the pokemons
     function filterPokemon(pokemonHeight){
         return pokemonList.filter(pokemon.height >= pokemonHeight);
@@ -39,6 +50,7 @@ let pokemonRepository = (function(){
     return{
         add: add,
         getAll: getAll,
+        addListItem: addListItem
      };
 
 
@@ -52,8 +64,12 @@ pokemonRepository.add({name: "Caterpie", height: 3, types: ['bug', 'electric']})
 pokemonRepository.add({name: "Wartortle", height: 10, types: ['dark', 'steel']});
 
 
-//print out each pokemon in the list 
+//select the unordered list in the DOM tree using it's class name
+let tempPokemonList = document.querySelector('.pokemon-list');
 
+
+//print out each pokemon in the list using DOM
 pokemonRepository.getAll().forEach(function(pokemon){
-    pokemon.height > 10? document.write(pokemon.name + " (height: " + pokemon.height + ") " + "- Wow, that's big!<br>"): document.write(pokemon.name + " (height: " + pokemon.height + ")<br>");
+    pokemonRepository.addListItem(pokemon);
+    
 });
