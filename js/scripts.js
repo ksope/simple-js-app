@@ -32,9 +32,7 @@ let pokemonRepository = (function(){
         button.innerText = pokemon.name;
         button.classList.add('button-style__salmon');
         listItem.appendChild(button);
-        button.addEventListener('click', function(){
-            showDetails(pokemon);
-        });
+        addButtonEvent(button, pokemon);
         tempPokemonList.appendChild(listItem);
 
     }
@@ -45,11 +43,17 @@ let pokemonRepository = (function(){
         button.innerText = pokemon.name;
         button.classList.add('button-style__darkOrange');
         listItem.appendChild(button);
-        button.addEventListener('click', function(){
-            showDetails(pokemon);
-        });
+        addButtonEvent(button, pokemon);
         tempPokemonList.appendChild(listItem);
         
+
+    }
+
+    //Add click event to a button
+    function addButtonEvent(element, pokemon){
+        element.addEventListener('click', function(){
+            showDetails(pokemon);
+        });
 
     }
 
