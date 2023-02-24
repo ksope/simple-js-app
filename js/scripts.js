@@ -26,14 +26,36 @@ let pokemonRepository = (function(){
     }
 
     //add a pokemon to the pokemon list using DOM
-    function addListItem(pokemon){
+    function addListItem__salmon(pokemon){
         let listItem = document.createElement('li');
         let button = document.createElement('button');
         button.innerText = pokemon.name;
         button.classList.add('button-style__salmon');
         listItem.appendChild(button);
+        button.addEventListener('click', function(){
+            showDetails(pokemon);
+        });
         tempPokemonList.appendChild(listItem);
 
+    }
+
+    function addListItem__orange(pokemon){
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('button-style__darkOrange');
+        listItem.appendChild(button);
+        button.addEventListener('click', function(){
+            showDetails(pokemon);
+        });
+        tempPokemonList.appendChild(listItem);
+        
+
+    }
+
+    //print out details of Pokemon
+    function showDetails(pokemon){
+        console.log(pokemon.name);
     }
 
  
@@ -50,7 +72,8 @@ let pokemonRepository = (function(){
     return{
         add: add,
         getAll: getAll,
-        addListItem: addListItem
+        addListItem__salmon: addListItem__salmon,
+        addListItem__orange: addListItem__orange
      };
 
 
@@ -70,6 +93,7 @@ let tempPokemonList = document.querySelector('.pokemon-list');
 
 //print out each pokemon in the list using DOM
 pokemonRepository.getAll().forEach(function(pokemon){
-    pokemonRepository.addListItem(pokemon);
-    
+    pokemon.height > 10? pokemonRepository.addListItem__salmon(pokemon): pokemonRepository.addListItem__orange(pokemon);
+
+   
 });
