@@ -1,32 +1,15 @@
 @media screen and ( max-width:600px){
-  .button-style__salmon{
+  .button-style{
       
       width: 80%;
       background: lightsalmon;
   }
-  .button-style__darkOrange{
-      
-    width: 80%;
-    background: darkorange;
-}
+
 }
 
-.button-style__salmon {
+.button-style {
 
   background :  salmon; 
-  color : White;
-  font : 3rem sans-serif;
-  border : none;
-  border-radius: 0.5rem;
-  padding : 0.75rem;
-  margin : 0.75rem ;
-  text-align : center;
-  cursor : pointer ;
-}
-
-.button-style__darkOrange {
-
-  background :  darkorange; 
   color : White;
   font : 3rem sans-serif;
   border : none;
