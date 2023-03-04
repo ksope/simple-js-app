@@ -1,6 +1,7 @@
 //create a list of Pokemons in an IIFE to avoid accidentally accessing the global state
 let pokemonRepository = (function(){
     let pokemonList = [];
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
     //add a new pokemon to the pokemonList
     function add(pokemon){
@@ -12,12 +13,12 @@ let pokemonRepository = (function(){
         }
         //check if pokemon is an object
         else if(typeof pokemon === 'object'){
-            if (Object.keys(pokemon).length === 3) {
-                if (Object.keys(pokemon)[0] === "name" && Object.keys(pokemon)[1] === "height" && Object.keys(pokemon)[2] === "types"){
+
+                if (Object.keys(pokemon)[0] === "name" ){
                     pokemonList.push(pokemon);
                     console.log("New pokemon added!")
                 }
-            }
+            
         }
         //if pokemon is not an object, display it's datatype
         else if (typeof pokemon !== 'object'){
@@ -26,28 +27,50 @@ let pokemonRepository = (function(){
     }
 
     //add a pokemon to the pokemon list using DOM
-    function addListItem__salmon(pokemon){
+    function addListItem(pokemon){
+        //select the unordered list in the DOM tree using it's class name
+        let tempPokemonList = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
         let button = document.createElement('button');
         button.innerText = pokemon.name;
-        button.classList.add('button-style__salmon');
+        button.classList.add('button-style');
         listItem.appendChild(button);
-        addButtonEvent(button, pokemon);
         tempPokemonList.appendChild(listItem);
+        addButtonEvent(button, pokemon);
 
     }
-
-    function addListItem__orange(pokemon){
-        let listItem = document.createElement('li');
-        let button = document.createElement('button');
-        button.innerText = pokemon.name;
-        button.classList.add('button-style__darkOrange');
-        listItem.appendChild(button);
-        addButtonEvent(button, pokemon);
-        tempPokemonList.appendChild(listItem);
-        
-
+    //Load list of pokemon
+    function loadList(){
+        return fetch(apiUrl).then(function (response) {
+            return response.json();
+          }).then(function (json) {
+            json.results.forEach(function (item) {
+              let pokemon = {
+                name: item.name,
+                detailsUrl: item.url
+              };
+              add(pokemon);
+            });
+          }).catch(function (e) {
+            console.error(e);
+          })
     }
+
+    //load details of pokemons
+    function loadDetails(item) {
+        let url = item.detailsUrl;
+        return fetch(url).then(function (response) {
+          return response.json();
+        }).then(function (details) {
+          // Now we add the details to the item
+          item.imageUrl = details.sprites.front_default;
+          item.height = details.height;
+          item.types = details.types;
+        }).catch(function (e) {
+          console.error(e);
+        });
+      }
+
 
     //Add click event to a button
     function addButtonEvent(element, pokemon){
@@ -58,46 +81,42 @@ let pokemonRepository = (function(){
     }
 
     //print out details of Pokemon
-    function showDetails(pokemon){
-        console.log(pokemon.name);
-    }
+    function showDetails(pokemon) {
+        loadDetails(pokemon).then(function () {
+          console.log(pokemon);
+        });
+      }
 
  
-    //filter the pokemonList based on the height of the pokemons
-    function filterPokemon(pokemonHeight){
-        return pokemonList.filter(pokemon.height >= pokemonHeight);
-    }
 
     //return all the pokemon objects in the pokemonList
     function getAll(){
         return pokemonList;
     }
 
+
     return{
         add: add,
         getAll: getAll,
-        addListItem__salmon: addListItem__salmon,
-        addListItem__orange: addListItem__orange
+        addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails
      };
 
 
 })();
 
-//add some Pokemons to the list
-pokemonRepository.add({name: "Bulbasaur", height: 7, types: ['grass', 'poison']});
-pokemonRepository.add({name: "Ivysaur", height: 10, types: ['grass', 'poison']});
-pokemonRepository.add({name: "Venusaur", height: 20, types: ['grass', 'poison']});
-pokemonRepository.add({name: "Caterpie", height: 3, types: ['bug', 'electric']});
-pokemonRepository.add({name: "Wartortle", height: 10, types: ['dark', 'steel']});
 
 
-//select the unordered list in the DOM tree using it's class name
-let tempPokemonList = document.querySelector('.pokemon-list');
 
 
-//print out each pokemon in the list using DOM
-pokemonRepository.getAll().forEach(function(pokemon){
-    pokemon.height > 10? pokemonRepository.addListItem__salmon(pokemon): pokemonRepository.addListItem__orange(pokemon);
 
-   
-});
+
+pokemonRepository.loadList().then(function() {
+    // Now the data is loaded!
+
+    //print out each pokemon in the list using DOM
+    pokemonRepository.getAll().forEach(function(pokemon){
+      pokemonRepository.addListItem(pokemon);
+    });
+  });
