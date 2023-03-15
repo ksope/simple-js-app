@@ -101,40 +101,34 @@ let pokemonRepository = (function(){
 
   function showModal(title, text, imageUrl) {
     // Clear all existing modal content
-    modalContainer.innerHTML = '';
-
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
-
-  let closeButtonElement = document.createElement('button');
-  closeButtonElement.classList.add('modal-close');
-  closeButtonElement.innerText = 'close';
-  closeButtonElement.addEventListener('click', hideModal);
-
-  let titleElement = document.createElement('h1');
-  titleElement.innerText = title;
-
-  let contentElement = document.createElement('p');
-  contentElement.innerText = `Height: ${text}`;
-
-  //set the attributes for the img
-  let imageElement = document.createElement("img");
-  imageElement.setAttribute("src", imageUrl);
-  imageElement.setAttribute("width", "304");
-  imageElement.setAttribute("height", "228");
-  imageElement.setAttribute("alt", title);
+    let modalBody = $(".modal-body");
+    let modalTitle = $(".modal-title");
 
 
-  //Add the Elements to the modal
-  modal.appendChild(closeButtonElement);
-  modal.appendChild(titleElement);
-  modal.appendChild(contentElement);
-  modal.appendChild(imageElement);
-  modalContainer.appendChild(modal);
+    modalTitle.empty();
+    modalBody.empty();
+    
 
-    //make modal visible
-    modalContainer.classList.add('is-visible');
-}
+    //display the title of the modal
+    $("#exampleModalLabel").text(title);
+
+
+    //set the attributes for the image of each pokemon
+    let pokemonImage = $("<img>")
+    pokemonImage.attr('src', imageUrl);
+    pokemonImage.attr("width", "50%");
+    pokemonImage.attr("height", "228");
+    pokemonImage.attr("alt", title);
+
+    //display the height of each pokemon
+    let pokemonHeight = $("<p>" + "Height : " + text + "</p>");
+
+    //Append the pokemon imae and height to the modal
+    modalBody.append(pokemonImage);
+    modalBody.append(pokemonHeight);
+
+   
+  }
 
 
 //remove the modal when Escape key is pressed
