@@ -31,14 +31,13 @@ let pokemonRepository = (function(){
   function addListItem(pokemon){
       let pokemonList = document.querySelector('.pokemon-list');
       let listItem = document.createElement('li');
-      listItem.classList.add('group-list-item', 'list-group-item-action');
       let button = document.createElement('button');
       button.innerText = pokemon.name;
       button.classList.add('btn', 'btn-primary');
-      button.setAttribute('type', 'button');
-      button.setAttribute('data-toggle', 'modal');
-      button.setAttribute('data-target', '#exampleModal');
-      listItem.classList.add('col-sm-6', 'col-lg-4', 'col-xl-2');
+        button.setAttribute('type', 'button');
+        button.setAttribute('data-toggle', 'modal');
+        button.setAttribute('data-target', '#exampleModal');
+        listItem.classList.add('col-sm-6', 'col-lg-4', 'col-xl-2');
       listItem.appendChild(button);
       pokemonList.appendChild(listItem);
       button.addEventListener("click", function(event) {
@@ -137,17 +136,12 @@ let pokemonRepository = (function(){
 }
 
 
-//Function to hide the modal
-function hideModal() {
-  modal.setAttribute('data-dismiss', 'modal');
- }
-
- //remove the modal when Escape key is pressed
- window.addEventListener('keydown', (e) => {
-   if (e.key === 'Escape') {
-     hideModal();
-   }
- });
+//remove the modal when Escape key is pressed
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+    hideModal();
+  }
+});
 
 modalContainer.addEventListener('click', (e) => {
   // Since this is also triggered when clicking INSIDE the modal container,
