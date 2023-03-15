@@ -31,13 +31,14 @@ let pokemonRepository = (function(){
   function addListItem(pokemon){
       let pokemonList = document.querySelector('.pokemon-list');
       let listItem = document.createElement('li');
+      listItem.classList.add('group-list-item', 'list-group-item-action');
       let button = document.createElement('button');
       button.innerText = pokemon.name;
       button.classList.add('btn', 'btn-primary');
-        button.setAttribute('type', 'button');
-        button.setAttribute('data-toggle', 'modal');
-        button.setAttribute('data-target', '#exampleModal');
-        listItem.classList.add('col-sm-6', 'col-lg-4', 'col-xl-2');
+      button.setAttribute('type', 'button');
+      button.setAttribute('data-toggle', 'modal');
+      button.setAttribute('data-target', '#exampleModal');
+      listItem.classList.add('col-sm-6', 'col-lg-4', 'col-xl-2');
       listItem.appendChild(button);
       pokemonList.appendChild(listItem);
       button.addEventListener("click", function(event) {
@@ -147,7 +148,7 @@ function hideModal() {
      hideModal();
    }
  });
- 
+
 modalContainer.addEventListener('click', (e) => {
   // Since this is also triggered when clicking INSIDE the modal container,
   // We only want to close if the user clicks directly on the overlay
