@@ -135,10 +135,6 @@ let pokemonRepository = (function(){
     modalContainer.classList.add('is-visible');
 }
 
-//Function to hide the modal
-function hideModal() {
- modalContainer.classList.remove('is-visible');
-}
 
 //remove the modal when Escape key is pressed
 window.addEventListener('keydown', (e) => {
