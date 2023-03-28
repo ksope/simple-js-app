@@ -1,7 +1,8 @@
 let pokemonRepository = (function () {
     let t = [],
-        e = document.querySelector("#modalBody");
-    function n(e) {
+        e = document.querySelector("#modalBody"),
+        n = window.$;
+    function o(e) {
         e
             ? Array.isArray(e)
                 ? console.log("pokemon is an array, not an object!")
@@ -16,7 +17,7 @@ let pokemonRepository = (function () {
                   )
             : console.log("pokemon is undefined!");
     }
-    function o(t) {
+    function i(t) {
         return fetch(t.detailsUrl)
             .then(function (t) {
                 return t.json();
@@ -30,31 +31,49 @@ let pokemonRepository = (function () {
                 console.error(t);
             });
     }
-    function i(t) {
-        o(t).then(function () {
-            var e, n, o;
-            let i, a, l;
+    function a(t) {
+        i(t).then(function () {
+            var e, o, i;
+            let a, l, r;
             (e = t.name),
-                (n = t.height),
-                (o = t.imageUrl),
-                (i = $(".modal-body")),
-                $(".modal-title").empty(),
-                i.empty(),
-                $("#exampleModalLabel").text(e),
-                (a = $("<img>")),
-                a.attr("src", o),
-                a.attr("width", "50%"),
-                a.attr("height", "228"),
-                a.attr("alt", e),
-                (l = $("<p>Height : " + n + "</p>")),
-                i.append(a),
-                i.append(l);
+                (o = t.height),
+                (i = t.imageUrl),
+                (a = n(".modal-body")),
+                n(".modal-title").empty(),
+                a.empty(),
+                n("#exampleModalLabel").text(e),
+                (l = n("<img>")),
+                l.attr("src", i),
+                l.attr("width", "50%"),
+                l.attr("height", "228"),
+                l.attr("alt", e),
+                (r = n("<p>Height : " + o + "</p>")),
+                a.append(l),
+                a.append(r);
         });
     }
-    function a() {
+    function l() {
         return t;
     }
     return (
+        document
+            .getElementById("search-input")
+            .addEventListener("input", function () {
+                let t;
+                (t = document
+                    .getElementById("search-input")
+                    .value.toLowerCase()),
+                    document
+                        .querySelectorAll(".group-list-item")
+                        .forEach(function (e) {
+                            e
+                                .querySelector(".btn")
+                                .innerText.toLowerCase()
+                                .includes(t)
+                                ? (e.style.display = "block")
+                                : (e.style.display = "none");
+                        });
+            }),
         window.addEventListener("keydown", (t) => {
             "Escape" === t.key &&
                 e.classList.contains("is-visible") &&
@@ -64,23 +83,23 @@ let pokemonRepository = (function () {
             t.target === e && hideModal();
         }),
         {
-            add: n,
-            getAll: a,
+            add: o,
+            getAll: l,
             addListItem: function t(e) {
                 let n = document.querySelector(".pokemon-list"),
                     o = document.createElement("li");
                 o.classList.add("group-list-item", "list-group-item-action");
-                let a = document.createElement("button");
-                (a.innerText = e.name),
-                    a.classList.add("btn", "btn-primary"),
-                    a.setAttribute("type", "button"),
-                    a.setAttribute("data-toggle", "modal"),
-                    a.setAttribute("data-target", "#exampleModal"),
+                let i = document.createElement("button");
+                (i.innerText = e.name),
+                    i.classList.add("btn", "btn-success"),
+                    i.setAttribute("type", "button"),
+                    i.setAttribute("data-toggle", "modal"),
+                    i.setAttribute("data-target", "#exampleModal"),
                     o.classList.add("col-sm-6", "col-lg-4", "col-xl-2"),
-                    o.appendChild(a),
+                    o.appendChild(i),
                     n.appendChild(o),
-                    a.addEventListener("click", function (t) {
-                        i(e);
+                    i.addEventListener("click", function (t) {
+                        a(e);
                     });
             },
             loadList: function t() {
@@ -91,15 +110,15 @@ let pokemonRepository = (function () {
                     .then(function (t) {
                         t.results.forEach(function (t) {
                             let e = { name: t.name, detailsUrl: t.url };
-                            n(e), console.log(e);
+                            o(e), console.log(e);
                         });
                     })
                     .catch(function (t) {
                         console.error(t);
                     });
             },
-            loadDetails: o,
-            showDetails: i,
+            loadDetails: i,
+            showDetails: a,
         }
     );
 })();
