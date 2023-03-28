@@ -1,0 +1,94 @@
+@import url(https://fonts.googleapis.com/css2?family=Lato&family=Uncial+Antiqua&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Lato&family=Uncial+Antiqua&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:wght@300&family=Cabin+Sketch&family=Lato&family=Uncial+Antiqua&display=swap);
+
+#header,
+.modal-footer {
+    background-size: cover
+}
+
+:root {
+    --color-white: #f3f3f3;
+    --color-light-green: #c9df8a;
+    --color-dark-green: #36802d;
+    --color-medium-green: #77ab59;
+    --color-very-light-green: #f0f7da;
+    --color-very-dark-green: #234d20
+}
+
+.btn-success,
+body::before {
+    color: var(--color-white);
+    width: 100%
+}
+
+body::before {
+    content: '';
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    margin: 0;
+    z-index: -1;
+    background: var(--color-white);
+    background-image: linear-gradient(115deg, rgba(236, 243, 247, .8), rgba(136, 136, 206, .7)), url("../img/pokemon_bkgrd2.png");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.btn-success {
+    background-color: var(--color-dark-green);
+    border-color: var(--color-dark-green);
+    margin: .25rem;
+    font-family: 'Uncial Antiqua', sans-serif
+}
+
+.btn-success:hover {
+    background-color: var(--color-very-dark-green);
+    border-color: var(--color-very-dark-green);
+    transform: scale(1.2, 1.1);
+    box-shadow: 0 0 5px 5px var(--color-light-green);
+    transition: box-shadow .3s, color .3s
+}
+
+.btn-success:active {
+    border-color: var(--color-medium-green);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+.modal-body {
+    text-align: center
+}
+
+#search-input {
+    font-family: 'Cabin Sketch', sans-serif
+}
+
+#header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-image: url("../img/pokemon-img-1a.png");
+    min-height: 9rem
+}
+
+.nav-background {
+    opacity: .88;
+    height: 100%;
+    width: 100%;
+    position: absolute
+}
+
+#exampleModalLabel {
+    font-family: 'Averia Sans Libre', sans-serif
+}
+
+#modalBody {
+    font-family: 'Uncial Antiqua', sans-serif;
+    font-size: 1.5rem
+}
+
+.modal-footer {
+    background-image: linear-gradient(115deg, rgba(236, 243, 247, .8), rgba(136, 136, 206, .7)), url("../img/pokemon-img-1a.png")
+}
