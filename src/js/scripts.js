@@ -3,6 +3,7 @@ let pokemonRepository = (function () {
     let pokemonList = [];
     let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
     let modalContainer = document.querySelector("#modalBody");
+    let $ = window.$;
 
     //add a new pokemon to the pokemonList
     function add(pokemon) {
@@ -35,7 +36,7 @@ let pokemonRepository = (function () {
         listItem.classList.add("group-list-item", "list-group-item-action");
         let button = document.createElement("button");
         button.innerText = pokemon.name;
-        button.classList.add("btn", "btn-primary");
+        button.classList.add("btn", "btn-success");
         button.setAttribute("type", "button");
         button.setAttribute("data-toggle", "modal");
         button.setAttribute("data-target", "#exampleModal");
@@ -122,6 +123,32 @@ let pokemonRepository = (function () {
         modalBody.append(pokemonImage);
         modalBody.append(pokemonHeight);
     }
+
+    // This function displays a list of pokemons based on the text entered in the search input.
+    function searchPokemon() {
+        let searchText = document
+            .getElementById("search-input")
+            .value.toLowerCase();
+        let pokemonListItem = document.querySelectorAll(".group-list-item");
+
+        pokemonListItem.forEach(function (pokemon) {
+            let pokemonName = pokemon
+                .querySelector(".btn")
+                .innerText.toLowerCase();
+
+            if (pokemonName.includes(searchText)) {
+                pokemon.style.display = "block";
+            } else {
+                pokemon.style.display = "none";
+            }
+        });
+    }
+
+    // Attach an event listener to the search input element to filter list of pokemons based on input.
+    let searchInput = document.getElementById("search-input");
+    searchInput.addEventListener("input", function () {
+        searchPokemon();
+    });
 
     //remove the modal when Escape key is pressed
     window.addEventListener("keydown", (e) => {
