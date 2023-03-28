@@ -6,6 +6,8 @@ You can copy or download the files locally to see how it works: Simply click on 
 
 The modal window can be closed by pressing the pressing 'Escape'key, clicking on the 'Close' or 'X' button or simply clicking outside the modal window.
 
+A new search feature has been added to enable filtering of displayed pokemons based on the value of input entered into the search field.
+
 The code was modified using bootstrap libraries especially for the modal window and styling of the pokemon buttons.
 
 Resources:
